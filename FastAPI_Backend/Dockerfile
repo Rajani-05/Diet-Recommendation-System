@@ -1,19 +1,16 @@
 # backend/Dockerfile
 
-FROM python:3.10.8
+FROM python:3.10
 
-RUN mkdir -p app/backend
+WORKDIR /app
 
-COPY FastAPI_Backend/requirements.txt app/backend/requirements.txt
-COPY Data app/Data
-
-COPY FastAPI_Backend app/backend
-
-WORKDIR /app/backend
+COPY requirements.txt .
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+COPY . .
+
 EXPOSE 8080
 
-CMD ["uvicorn","main:app","--host","0.0.0.0","--port","8080","--reload"]
+CMD ["uvicorn","main:app","--host","0.0.0.0","--port","8080"]
