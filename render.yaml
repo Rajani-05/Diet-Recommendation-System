@@ -1,0 +1,26 @@
+services:
+  # ── FastAPI Backend ──────────────────────────────────────────────────────────
+  - type: web
+    name: diet-backend
+    runtime: docker
+    dockerfilePath: ./FastAPI_Backend/Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8080
+
+  # ── Streamlit Frontend ───────────────────────────────────────────────────────
+  - type: web
+    name: diet-frontend
+    runtime: docker
+    dockerfilePath: ./Streamlit_Frontend/Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: BACKEND_URL
+        fromService:
+          name: diet-backend
+          type: web
+          property: host
+          envVarKey: BACKEND_URL_VALUE
