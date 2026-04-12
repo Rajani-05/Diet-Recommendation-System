@@ -75,7 +75,8 @@ class Person:
             else:
                 recommended_nutrition = [meal_calories,rnd(10,30),rnd(0,4),rnd(0,30),rnd(0,400),rnd(40,75),rnd(4,10),rnd(0,10),rnd(30,100)]
             generator=Generator(recommended_nutrition)
-            recommended_recipes=generator.generate().json()['output']
+            response = generator.generate()
+            recommended_recipes = response.json()['output']
             recommendations.append(recommended_recipes)
         for recommendation in recommendations:
             for recipe in recommendation:
@@ -262,16 +263,25 @@ with st.form("recommendation_form"):
         meals_calories_perc={'breakfast':0.30,'morning snack':0.05,'lunch':0.40,'afternoon snack':0.05,'dinner':0.20}
     generated = st.form_submit_button("Generate")
 if generated:
-    st.session_state.generated=True
+    st.session_state.generated=False   # reset until success
     person = Person(age,height,weight,gender,activity,meals_calories_perc,weight_loss)
     with st.container():
         display.display_bmi(person)
     with st.container():
         display.display_calories(person)
-    with st.spinner('Generating recommendations...'):     
-        recommendations=person.generate_recommendations()
-        st.session_state.recommendations=recommendations
-        st.session_state.person=person
+    with st.spinner('Contacting the recommendation engine — this may take up to 60 s on first use while the server wakes up...'):
+        try:
+            recommendations=person.generate_recommendations()
+            st.session_state.recommendations=recommendations
+            st.session_state.person=person
+            st.session_state.generated=True
+        except Exception as e:
+            st.warning(
+                "⚠️ The backend is starting up (free-tier cold-start). "
+                "Please click **Generate** again in about 30 seconds.",
+                icon="⏳"
+            )
+            st.error(f"Details: {e}")
 
 if st.session_state.generated:
     with st.container():

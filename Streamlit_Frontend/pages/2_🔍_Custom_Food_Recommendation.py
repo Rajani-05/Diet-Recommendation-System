@@ -122,11 +122,19 @@ with st.form("recommendation_form"):
     st.caption('Example: Milk;eggs;butter;chicken...')
     generated = st.form_submit_button("Generate")
 if generated:
-    with st.spinner('Generating recommendations...'): 
-        recommendation=Recommendation(nutritions_values_list,nb_recommendations,ingredient_txt)
-        recommendations=recommendation.generate()
-        st.session_state.recommendations=recommendations
-    st.session_state.generated=True 
+    with st.spinner('Contacting the recommendation engine — this may take up to 60 s on first use while the server wakes up...'): 
+        try:
+            recommendation=Recommendation(nutritions_values_list,nb_recommendations,ingredient_txt)
+            recommendations=recommendation.generate()
+            st.session_state.recommendations=recommendations
+            st.session_state.generated=True
+        except Exception as e:
+            st.warning(
+                "⚠️ The backend is starting up (free-tier cold-start). "
+                "Please click **Generate** again in about 30 seconds.",
+                icon="⏳"
+            )
+            st.error(f"Details: {e}")
 
 if st.session_state.generated:
     with st.container():
