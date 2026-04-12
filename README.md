@@ -8,12 +8,12 @@
    Built with   *FastAPI* (backend)  +  *Streamlit* (frontend)  +  *Scikit-Learn* (ML model).
 
 ---
-<section style="padding: 40px; margin: 20px auto; max-width: 900px; background-color: #f8f9fa; border-radius: 10px;">
-    <h2 style="color: #dc3545;">🌐🔗 Live Demo</h2>
+<p style="font-size: 18px;">
+    🌐🔗 Link :
     <a href="https://rajani-diet.onrender.com/" target="_blank" style="text-decoration: underline; color: #007bff;">
         https://rajani-diet.onrender.com/
     </a>
-</section>
+</p>
 
 
 ### Model developement
