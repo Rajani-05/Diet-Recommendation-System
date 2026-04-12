@@ -5,38 +5,52 @@
   <h4>A diet recommendation web application using content-based approach with Scikit-Learn, FastAPI and Streamlit.</h4>
 </div>
 
-# Diet-Recommendation-System
-
-## :bookmark_tabs:Table of contents
-* [General info](#general-info)
-* [Development](#development)
-* [Technologies](#technologies)
-* [Setup](#setup)
-
 ## :scroll: General info
-### Motivation
-People from all around the world are getting more concerned in their health and way of life in today's modern environment. However, avoiding junk food and exercising alone are insufficient; we also need to eat a balanced diet. We can live a healthy life with a balanced diet based on our height, weight, and age. Your diet can help you achieve and maintain a healthy weight, lower your chance of developing chronic diseases (including cancer and heart disease), and improve your general health when combined with physical activity. Nevertheless, there is a little SOTA project on food/diet recommendation system. Therefore I got the idea to build a content-based recommendation system for this purpose using machine learning. 
-### What is a food recommendation engine?
-A food recommendation engine using a content-based approach is an important tool for promoting healthy eating habits. This type of engine uses information about the nutritional content and ingredients of foods to make personalized recommendations to users. One of the key advantages of a content-based approach is that it takes into account an individual's dietary restrictions and preferences, such as allergies or food preferences. By providing users with tailored recommendations, a content-based food recommendation engine can help them make better choices about what to eat and improve their overall health. Additionally, by recommending a variety of healthy foods, it can also help users to discover new and nutritious options, expand their dietary horizons and overcome food boredom. All these can lead to a better and well-rounded diet, which can have a positive impact on long-term health outcomes.
+A full-stack web application that recommends personalized food & diet plans based on your **nutrition goals** and **ingredients**.  
+Built with **FastAPI** (backend) + **Streamlit** (frontend) + **Scikit-Learn** (ML model).
 
-### What is a content-based recommendation engine?
-A content-based recommendation engine is a type of recommendation system that uses the characteristics or content of an item to recommend similar items to users. It works by analyzing the content of items, such as text, images, or audio, and identifying patterns or features that are associated with certain items. These patterns or features are then used to compare items and recommend similar ones to users.
-<div align= "center"><img src="Assets/content_based_img.webp" /></div>
+---
 
-### Why content-based approach?
+## 📁 Folder Structure
 
-* No data from other users is required to start making recommendations.
-* Recommendations are highly relevant to the user.
-* Recommendations are transparent to the user.
-* You avoid the “cold start” problem. 
-* Content-based filtering systems are generally easier to create.
+```
+Diet-Recommendation-System-main/
+│
+├── 📂 FastAPI_Backend/                         ← Backend (API Server)
+│   ├── main.py                                 ← API routes & data loading
+│   ├── model.py                                ← ML recommendation logic
+│   ├── requirements.txt                        ← Backend Python dependencies
+│   ├── Dockerfile                              ← Docker setup for backend
+│   └── .dockerignore                           ← Files excluded from Docker build
+│
+├── 📂 Streamlit_Frontend/                      ← Frontend (User Interface)
+│   ├── Hello.py                                ← Home / Welcome page
+│   ├── Generate_Recommendations.py             ← Calls backend API & shows results
+│   ├── 📂 pages/
+│   │   ├── 1_💪_Diet_Recommendation.py         ← Page 1: Diet plan by health goals
+│   │   └── 2_🔍_Custom_Food_Recommendation.py  ← Page 2: Search food by ingredients
+│   ├── 📂 ImageFinder/                         ← Helper to fetch food images
+│   ├── requirements.txt                        ← Frontend Python dependencies
+│   ├── Dockerfile                              ← Docker setup for frontend
+│   └── .dockerignore                           ← Files excluded from Docker build
+│
+├── 📂 Data/
+│   ├── dataset.csv                             ← Full food dataset (~95 MB, 500k+ recipes)
+│   └── dataset_small.csv.gz                   ← Compressed 50k-row dataset (used on Render)
+│
+├── 📂 Assets/                                  ← Images and static files
+├── 📂 Docs/                                    ← Extra documentation
+├── 📂 .github/                                 ← GitHub Actions / workflows
+│
+├── docker-compose.yml                          ← Run both services together locally
+├── render.yaml                                 ← Render.com deployment config
+├── food-recommendation-system.ipynb            ← Original research Jupyter notebook
+├── .gitignore                                  ← Git ignored files
+└── README.md                                   ← This file
+```
+## 🌍 Live Deployment:
+https://rajani-diet.onrender.com/
 
-### Challenges of content-based approach
-* There’s a lack of novelty and diversity.
-* Scalability is a challenge.
-* Attributes may be incorrect or inconsistent. 
-
-## :computer:Development
 ### Model developement
 The recommendation engine is built using Nearest Neighbors alogrithm which is an unsupervised learner for implementing neighbor searches. It acts as a uniform interface to three different nearest neighbors algorithms: BallTree, KDTree, and a brute-force algorithm based on routines in sklearn.metrics.pairwise. For our case, we used the brute-force algorithm using cosine similarity due to its fast computation for small datasets.
 
@@ -47,9 +61,6 @@ I used Food.com kaggle dataset Data with over 500,000 recipes and 1,400,000 revi
 ### Backend Developement
 The application is built using the FastAPI framework, which allows for the creation of fast and efficient web APIs. When a user makes a request to the API (user data,nutrition data...) the model is used to generate a list of recommended food similar/suitable to his request (data) which are then returned to the user via the API.
 
-### Frontend Developement
-
-The application's front-end is made with Streamlit. Streamlit is an open source app framework in Python language. It helps to create web apps for data science and machine learning in a short time. It is compatible with major Python libraries such as scikit-learn, Keras, PyTorch, SymPy(latex), NumPy, pandas, Matplotlib etc. For our case the front-end is composed of three web pages. The main page is Hello.py which is a welcoming page used to introduce you to my project. The side bar on the left allows the user to navigate too the automatic diet recommendation page and the custom food recommendation page. In the diet recommendation page the user can fill information about his age,weight,height.. and gets a diet recommendation based on his information. Besides, the custom food recommendation allows the user to specify more his food preferency using nutritional values.
 
 ### Deployement using Docker
 #### Why Docker?
