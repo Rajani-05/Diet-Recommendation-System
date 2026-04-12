@@ -1,11 +1,11 @@
-# backend/Dockerfile  –  slim build to stay under Render 512 MB limit
+# backend/Dockerfile  –  slim multi-stage build to stay under Render 512MB limit
 
-# ── Stage 1: install wheels ───────────────────────────────────────────────────
+# ── Stage 1: install Python packages ─────────────────────────────────────────
 FROM python:3.10-slim AS builder
 
 WORKDIR /build
 
-# System deps needed to compile scikit-learn wheels (if no pre-built wheel exists)
+# gcc needed to compile any C-extensions (e.g. numpy/scikit-learn wheels)
 RUN apt-get update && apt-get install -y --no-install-recommends gcc && \
     rm -rf /var/lib/apt/lists/*
 
@@ -16,18 +16,25 @@ RUN pip install --upgrade pip --no-cache-dir && \
 # ── Stage 2: lean runtime image ───────────────────────────────────────────────
 FROM python:3.10-slim
 
-# Copy only installed packages from builder stage
+# Copy only installed packages from builder stage (no build tools)
 COPY --from=builder /install /usr/local
 
-# Copy app source and data
-RUN mkdir -p /app/backend /app/Data
+# Copy app source
+RUN mkdir -p /app/backend
 COPY FastAPI_Backend/ /app/backend/
-COPY Data/dataset.csv /app/Data/dataset.csv
+
+# Copy only the 50k-row sampled dataset (12 MB vs 90 MB full file)
+RUN mkdir -p /app/Data
+COPY Data/dataset_small.csv.gz /app/Data/dataset_small.csv.gz
 
 WORKDIR /app/backend
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    OMP_NUM_THREADS=1 \
+    OPENBLAS_NUM_THREADS=1 \
+    MKL_NUM_THREADS=1 \
+    NUMEXPR_NUM_THREADS=1
 
 EXPOSE 8080
 
