@@ -88,23 +88,32 @@ In the project root run:
 ```
 $ docker-compose up -d --build
 ```
-Then open http://localhost:8501 and enjoy :smiley:.
+Then open http://localhost:8501 and enjoy 
 
 PS: You should have docker and docker-compose already installed
-### Use the hosted version on Streamlit Cloud
 
-https://diet-recommendation-system.streamlit.app/
+## 🛠️ Tech Stack
 
-## Citation
-```
-@software{narjis_2024_12507829,
-  author       = {Narjis, Zakaria},
-  title        = {Diet recommendation system},
-  month        = jun,
-  year         = 2024,
-  publisher    = {Zenodo},
-  version      = {v1.0.1},
-  doi          = {10.5281/zenodo.12507829},
-  url          = {https://doi.org/10.5281/zenodo.12507829}
-}
-```
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| Frontend | Streamlit | Web UI for user input & results |
+| Backend | FastAPI | REST API server |
+| ML Model | Scikit-Learn (KNN) | Food recommendation engine |
+| Data | Pandas + CSV | Food dataset (500k+ recipes) |
+| Containerization | Docker | Package & run both services |
+| Deployment | Render.com | Cloud hosting |
+
+---
+
+## 📦 Key Python Libraries
+
+| Library | Used In | Why |
+|---------|---------|-----|
+| `fastapi` | Backend | Build REST API |
+| `uvicorn` | Backend | Run the FastAPI server |
+| `pandas` | Backend | Load & filter food dataset |
+| `scikit-learn` | Backend | KNN model, StandardScaler |
+| `streamlit` | Frontend | Build interactive web UI |
+| `pydantic` | Backend | Validate API request data |
+
+---
