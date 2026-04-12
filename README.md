@@ -2,9 +2,9 @@
 
 <h1 align="center">Diet Recommendation System</h1>
 
-  <h4>A diet recommendation web application using content-based approach with Scikit-Learn, FastAPI and Streamlit.</h4>
-
 ## :scroll: General info
+
+  <h4>A diet recommendation web application using content-based approach with Scikit-Learn, FastAPI and Streamlit.</h4>
 A full-stack web application that recommends personalized food & diet plans based on your **nutrition goals** and **ingredients**.  
 Built with **FastAPI** (backend) + **Streamlit** (frontend) + **Scikit-Learn** (ML model).
 
