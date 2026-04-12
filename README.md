@@ -12,7 +12,8 @@ Built with **FastAPI** (backend) + **Streamlit** (frontend) + **Scikit-Learn** (
 ---
 
 ## 🌍 Live Deployment : https://rajani-diet.onrender.com/
-```
+
+---
 
 ### Model developement
 The recommendation engine is built using Nearest Neighbors alogrithm which is an unsupervised learner for implementing neighbor searches. It acts as a uniform interface to three different nearest neighbors algorithms: BallTree, KDTree, and a brute-force algorithm based on routines in sklearn.metrics.pairwise. For our case, we used the brute-force algorithm using cosine similarity due to its fast computation for small datasets.
