@@ -10,7 +10,7 @@ A full-stack web application that recommends personalized food & diet plans base
 Built with **FastAPI** (backend) + **Streamlit** (frontend) + **Scikit-Learn** (ML model).
 
 ---
-```
+
 ## 🌍 Live Deployment : https://rajani-diet.onrender.com/
 ```
 
