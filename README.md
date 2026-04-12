@@ -8,21 +8,13 @@
    Built with   *FastAPI* (backend)  +  *Streamlit* (frontend)  +  *Scikit-Learn* (ML model).
 
 ---
-<section style="padding: 40px; margin: 20px auto; max-width: 900px; background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); border-left: 5px solid #dc3545;">
-    <h2 style="color: #dc3545; font-size: 32px; border-bottom: 2px solid #dc3545; padding-bottom: 10px; margin-bottom: 20px;">🔗 Links</h2>
-    <ul style="font-size: 18px; color: #007bff; list-style-type: square; margin-left: 40px; line-height: 1.6;">
-        <li>
-            <a href="https://rajani-diet.onrender.com/" target="_blank" style="text-decoration: none;">
-                🌐 Live Web App
-            </a>
-        </li>
-        <li>
-            View the results in the outputs  
-            https://rajani-diet.onrender.com/
-        </li>
-    </ul>
+<section style="padding: 40px; margin: 20px auto; max-width: 900px; background-color: #f8f9fa; border-radius: 10px;">
+    <h2 style="color: #dc3545;">🔗 Link</h2>
+    <a href="https://rajani-diet.onrender.com/" target="_blank" style="text-decoration: underline; color: #007bff;">
+        https://rajani-diet.onrender.com/
+    </a>
 </section>
----
+
 
 ### Model developement
 The recommendation engine is built using Nearest Neighbors alogrithm which is an unsupervised learner for implementing neighbor searches. It acts as a uniform interface to three different nearest neighbors algorithms: BallTree, KDTree, and a brute-force algorithm based on routines in sklearn.metrics.pairwise. For our case, we used the brute-force algorithm using cosine similarity due to its fast computation for small datasets.
