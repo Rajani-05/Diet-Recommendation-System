@@ -5,8 +5,8 @@
 ## :scroll: General info
 
   <h4>A diet recommendation web application using content-based approach with Scikit-Learn, FastAPI and Streamlit.</h4>
-A full-stack web application that recommends personalized food & diet plans based on your **nutrition goals** and **ingredients**.  
-Built with **FastAPI** (backend) + **Streamlit** (frontend) + **Scikit-Learn** (ML model).
+<h4>A full-stack web application that recommends personalized food & diet plans based on your **nutrition goals** and **ingredients**.  
+Built with **FastAPI** (backend) + **Streamlit** (frontend) + **Scikit-Learn** (ML model).</h4>
 
 ---
 
@@ -60,7 +60,6 @@ The project is created with:
 
 ---
 
-## 📦 Key Python Libraries
 
 
 ---
@@ -79,11 +78,6 @@ The project is created with:
 
 ---
 
-## 🗂️ GitHub Repository
-
-```
-https://github.com/Rajani-05/Diet-Recommendation-System
-```
 ## 📁 Folder Structure
 
 ```
