@@ -1,7 +1,7 @@
 services:
   # ── FastAPI Backend ──────────────────────────────────────────────────────────
   - type: web
-    name: diet-backend
+    name: rajani-diet-backend
     runtime: docker
     dockerfilePath: ./FastAPI_Backend/Dockerfile
     dockerContext: .
@@ -12,15 +12,11 @@ services:
 
   # ── Streamlit Frontend ───────────────────────────────────────────────────────
   - type: web
-    name: diet-frontend
+    name: rajani-diet-frontend
     runtime: docker
     dockerfilePath: ./Streamlit_Frontend/Dockerfile
     dockerContext: .
     plan: free
     envVars:
       - key: BACKEND_URL
-        fromService:
-          name: diet-backend
-          type: web
-          property: host
-          envVarKey: BACKEND_URL_VALUE
+        value: https://rajani-diet-backend.onrender.com
