@@ -48,9 +48,9 @@ Diet-Recommendation-System-main/
 ├── .gitignore                                  ← Git ignored files
 └── README.md                                   ← This file
 ```
-## 🌍 Live Deployment:
-https://rajani-diet.onrender.com/
-
+```
+## 🌍 Live Deployment : https://rajani-diet.onrender.com/
+```
 ### Model developement
 The recommendation engine is built using Nearest Neighbors alogrithm which is an unsupervised learner for implementing neighbor searches. It acts as a uniform interface to three different nearest neighbors algorithms: BallTree, KDTree, and a brute-force algorithm based on routines in sklearn.metrics.pairwise. For our case, we used the brute-force algorithm using cosine similarity due to its fast computation for small datasets.
 
@@ -58,15 +58,10 @@ $$cos(theta) = (A * B) / (||A|| * ||B||)$$
 
 ### Dataset
 I used Food.com kaggle dataset Data with over 500,000 recipes and 1,400,000 reviews from Food.com. Visit this [kaggle](https://www.kaggle.com/datasets/irkaal/foodcom-recipes-and-reviews?select=recipes.csv) link for more details.
-### Backend Developement
-The application is built using the FastAPI framework, which allows for the creation of fast and efficient web APIs. When a user makes a request to the API (user data,nutrition data...) the model is used to generate a list of recommended food similar/suitable to his request (data) which are then returned to the user via the API.
-
 
 ### Deployement using Docker
 #### Why Docker?
 By using Docker, you can ensure that the environment in which the application is exactly the same as the environment in which it was built, which can help prevent unexpected issues and improve model performance. Additionally, Docker allows for easy scaling and management of the deployment, making it a great choice for larger machine learning projects.
-#### Docker-Compose
-My project is composed of different services (frontend,API). Therefore, our application should run on multiple containers. With the help of Docker-compose we can share our application using the yaml file that define the services that runs together.
 
 ### Project Architecture
 
@@ -88,20 +83,6 @@ The project is created with:
 ![](https://img.icons8.com/color/48/null/python--v1.png)![](https://img.icons8.com/color/48/null/numpy.png)![](Assets/streamlit-icon-48x48.png)![](Assets/fastapi.ico)![](Assets/scikit-learn.ico) ![](https://img.icons8.com/color/48/null/pandas.png)
 
 ## :whale: Setup
-
-### Run it locally
-#### Clone the repo
-```
-$ git clone https://github.com/Rajani-05/Diet-Recommendation-System.git
-```
-### docker-compose
-In the project root run:
-```
-$ docker-compose up -d --build
-```
-Then open http://localhost:8501 and enjoy 
-
-PS: You should have docker and docker-compose already installed
 
 ## 🛠️ Tech Stack
 
@@ -128,3 +109,25 @@ PS: You should have docker and docker-compose already installed
 | `pydantic` | Backend | Validate API request data |
 
 ---
+---
+
+## 📌 Pages in the App
+
+### Page 1 — 💪 Diet Recommendation
+- Enter your: **age, height, weight, activity level, diet type, meals per day**
+- App calculates your daily nutrition needs (BMI, TDEE)
+- Returns a **full day meal plan** (breakfast, lunch, dinner, snacks)
+
+### Page 2 — 🔍 Custom Food Recommendation
+- Enter specific **ingredients** you have
+- Enter desired **nutrition values** manually
+- Returns matching **recipes** from the dataset
+
+---
+
+## 🗂️ GitHub Repository
+
+```
+https://github.com/Rajani-05/Diet-Recommendation-System
+```
+
