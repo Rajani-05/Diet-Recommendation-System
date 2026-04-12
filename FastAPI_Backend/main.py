@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from pydantic import BaseModel, conlist
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, validator
 from typing import List, Optional
 import pandas as pd
 import os
@@ -34,7 +35,8 @@ _small = os.path.join(BASE_DIR, "Data", "dataset_small.csv.gz")
 _full  = os.path.join(BASE_DIR, "Data", "dataset.csv")
 
 _path  = _small if os.path.exists(_small) else _full
-_compression = "gzip"   # both files are gzip-compressed
+# Use 'infer' so .gz files are auto-decompressed and plain .csv works too
+_compression = "infer"
 
 dataset = pd.read_csv(
     _path,
@@ -54,15 +56,29 @@ dataset.reset_index(drop=True, inplace=True)
 
 app = FastAPI()
 
+# Allow all origins so the Streamlit frontend (different domain) can call us
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 class Params(BaseModel):
     n_neighbors: int = 5
     return_distance: bool = False
 
 
 class PredictionIn(BaseModel):
-    nutrition_input: conlist(float, min_items=9, max_items=9)
+    nutrition_input: List[float]
     ingredients: List[str] = []
-    params: Optional[Params]
+    params: Optional[Params] = None
+
+    @validator('nutrition_input')
+    def check_nutrition_length(cls, v):
+        if len(v) != 9:
+            raise ValueError('nutrition_input must have exactly 9 values')
+        return v
 
 
 class Recipe(BaseModel):

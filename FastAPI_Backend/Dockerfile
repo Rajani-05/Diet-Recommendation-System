@@ -1,7 +1,7 @@
 # backend/Dockerfile  –  slim multi-stage build to stay under Render 512MB limit
 
 # ── Stage 1: install Python packages ─────────────────────────────────────────
-FROM python:3.10-slim AS builder
+FROM python:3.10-slim-bookworm AS builder
 
 WORKDIR /build
 
@@ -14,7 +14,7 @@ RUN pip install --upgrade pip --no-cache-dir && \
     pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 # ── Stage 2: lean runtime image ───────────────────────────────────────────────
-FROM python:3.10-slim
+FROM python:3.10-slim-bookworm
 
 # Copy only installed packages from builder stage (no build tools)
 COPY --from=builder /install /usr/local
@@ -38,4 +38,5 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 EXPOSE 8080
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Use 1 worker to keep memory under 512MB; --timeout 120 allows slow cold starts
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", "1", "--timeout-keep-alive", "30"]
