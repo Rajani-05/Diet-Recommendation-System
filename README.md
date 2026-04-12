@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/582718021.svg)](https://zenodo.org/doi/10.5281/zenodo.12507163)
+[![DOI](https://zenodo.org/badge/582718021.svg)](https://zenodo.org/doi/10.5281/zenodo.12507163)]
 
 <h1 align="center">Diet Recommendation System</h1>
 
