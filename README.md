@@ -9,7 +9,7 @@
 
 ---
 <section style="padding: 40px; margin: 20px auto; max-width: 900px; background-color: #f8f9fa; border-radius: 10px;">
-    <h2 style="color: #dc3545;">🔗 Link</h2>
+    <h2 style="color: #dc3545;">🌐🔗 Live Demo</h2>
     <a href="https://rajani-diet.onrender.com/" target="_blank" style="text-decoration: underline; color: #007bff;">
         https://rajani-diet.onrender.com/
     </a>
