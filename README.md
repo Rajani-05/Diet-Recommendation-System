@@ -10,47 +10,10 @@ A full-stack web application that recommends personalized food & diet plans base
 Built with **FastAPI** (backend) + **Streamlit** (frontend) + **Scikit-Learn** (ML model).
 
 ---
-
-## 📁 Folder Structure
-
-```
-Diet-Recommendation-System-main/
-│
-├── 📂 FastAPI_Backend/                         ← Backend (API Server)
-│   ├── main.py                                 ← API routes & data loading
-│   ├── model.py                                ← ML recommendation logic
-│   ├── requirements.txt                        ← Backend Python dependencies
-│   ├── Dockerfile                              ← Docker setup for backend
-│   └── .dockerignore                           ← Files excluded from Docker build
-│
-├── 📂 Streamlit_Frontend/                      ← Frontend (User Interface)
-│   ├── Hello.py                                ← Home / Welcome page
-│   ├── Generate_Recommendations.py             ← Calls backend API & shows results
-│   ├── 📂 pages/
-│   │   ├── 1_💪_Diet_Recommendation.py         ← Page 1: Diet plan by health goals
-│   │   └── 2_🔍_Custom_Food_Recommendation.py  ← Page 2: Search food by ingredients
-│   ├── 📂 ImageFinder/                         ← Helper to fetch food images
-│   ├── requirements.txt                        ← Frontend Python dependencies
-│   ├── Dockerfile                              ← Docker setup for frontend
-│   └── .dockerignore                           ← Files excluded from Docker build
-│
-├── 📂 Data/
-│   ├── dataset.csv                             ← Full food dataset (~95 MB, 500k+ recipes)
-│   └── dataset_small.csv.gz                   ← Compressed 50k-row dataset (used on Render)
-│
-├── 📂 Assets/                                  ← Images and static files
-├── 📂 Docs/                                    ← Extra documentation
-├── 📂 .github/                                 ← GitHub Actions / workflows
-│
-├── docker-compose.yml                          ← Run both services together locally
-├── render.yaml                                 ← Render.com deployment config
-├── food-recommendation-system.ipynb            ← Original research Jupyter notebook
-├── .gitignore                                  ← Git ignored files
-└── README.md                                   ← This file
-```
 ```
 ## 🌍 Live Deployment : https://rajani-diet.onrender.com/
 ```
+
 ### Model developement
 The recommendation engine is built using Nearest Neighbors alogrithm which is an unsupervised learner for implementing neighbor searches. It acts as a uniform interface to three different nearest neighbors algorithms: BallTree, KDTree, and a brute-force algorithm based on routines in sklearn.metrics.pairwise. For our case, we used the brute-force algorithm using cosine similarity due to its fast computation for small datasets.
 
@@ -99,16 +62,7 @@ The project is created with:
 
 ## 📦 Key Python Libraries
 
-| Library | Used In | Why |
-|---------|---------|-----|
-| `fastapi` | Backend | Build REST API |
-| `uvicorn` | Backend | Run the FastAPI server |
-| `pandas` | Backend | Load & filter food dataset |
-| `scikit-learn` | Backend | KNN model, StandardScaler |
-| `streamlit` | Frontend | Build interactive web UI |
-| `pydantic` | Backend | Validate API request data |
 
----
 ---
 
 ## 📌 Pages in the App
@@ -129,5 +83,42 @@ The project is created with:
 
 ```
 https://github.com/Rajani-05/Diet-Recommendation-System
+```
+## 📁 Folder Structure
+
+```
+Diet-Recommendation-System-main/
+│
+├── 📂 FastAPI_Backend/                         ← Backend (API Server)
+│   ├── main.py                                 ← API routes & data loading
+│   ├── model.py                                ← ML recommendation logic
+│   ├── requirements.txt                        ← Backend Python dependencies
+│   ├── Dockerfile                              ← Docker setup for backend
+│   └── .dockerignore                           ← Files excluded from Docker build
+│
+├── 📂 Streamlit_Frontend/                      ← Frontend (User Interface)
+│   ├── Hello.py                                ← Home / Welcome page
+│   ├── Generate_Recommendations.py             ← Calls backend API & shows results
+│   ├── 📂 pages/
+│   │   ├── 1_💪_Diet_Recommendation.py         ← Page 1: Diet plan by health goals
+│   │   └── 2_🔍_Custom_Food_Recommendation.py  ← Page 2: Search food by ingredients
+│   ├── 📂 ImageFinder/                         ← Helper to fetch food images
+│   ├── requirements.txt                        ← Frontend Python dependencies
+│   ├── Dockerfile                              ← Docker setup for frontend
+│   └── .dockerignore                           ← Files excluded from Docker build
+│
+├── 📂 Data/
+│   ├── dataset.csv                             ← Full food dataset (~95 MB, 500k+ recipes)
+│   └── dataset_small.csv.gz                   ← Compressed 50k-row dataset (used on Render)
+│
+├── 📂 Assets/                                  ← Images and static files
+├── 📂 Docs/                                    ← Extra documentation
+├── 📂 .github/                                 ← GitHub Actions / workflows
+│
+├── docker-compose.yml                          ← Run both services together locally
+├── render.yaml                                 ← Render.com deployment config
+├── food-recommendation-system.ipynb            ← Original research Jupyter notebook
+├── .gitignore                                  ← Git ignored files
+└── README.md                                   ← This file
 ```
 
