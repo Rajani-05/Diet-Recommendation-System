@@ -1,3 +1,7 @@
+.venv
+__pycache__
+*.pyc
+*.pyo
 keys.py
 test.py
-__pycache__
+.pytest_cache

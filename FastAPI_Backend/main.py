@@ -7,7 +7,31 @@ from model import recommend, output_recommended_recipes
 
 # Dataset path resolved relative to this file (works on Render)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-dataset = pd.read_csv(os.path.join(BASE_DIR, "Data", "dataset.csv"), compression="gzip")
+
+# Load only needed columns with optimized dtypes to stay under 512MB on Render free tier
+USED_COLS = [
+    'Name', 'CookTime', 'PrepTime', 'TotalTime',
+    'RecipeIngredientParts',
+    'Calories', 'FatContent', 'SaturatedFatContent', 'CholesterolContent',
+    'SodiumContent', 'CarbohydrateContent', 'FiberContent', 'SugarContent',
+    'ProteinContent', 'RecipeInstructions'
+]
+NUMERIC_COLS = [
+    'Calories', 'FatContent', 'SaturatedFatContent', 'CholesterolContent',
+    'SodiumContent', 'CarbohydrateContent', 'FiberContent', 'SugarContent', 'ProteinContent'
+]
+dataset = pd.read_csv(
+    os.path.join(BASE_DIR, "Data", "dataset.csv"),
+    compression="gzip",
+    usecols=lambda c: c in USED_COLS,
+)
+# Downcast numeric columns to float32 to halve memory usage
+for col in NUMERIC_COLS:
+    if col in dataset.columns:
+        dataset[col] = pd.to_numeric(dataset[col], errors='coerce').astype('float32')
+# Drop rows with any missing numeric values
+dataset.dropna(subset=NUMERIC_COLS, inplace=True)
+dataset.reset_index(drop=True, inplace=True)
 
 app = FastAPI()
 
